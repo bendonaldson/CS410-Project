@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -55,6 +56,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private Vector2 _frameVelocity;
     private bool _cachedQueryStartInColliders;
 
+    public ResetScene reset;
+
     #region Interface
 
     public Vector2 FrameInput => _frameInput.Move;
@@ -87,6 +90,16 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _jumpAction.action.canceled -= OnJumpCanceled;
         _moveAction.action.Disable();
         _jumpAction.action.Disable();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision occurred with: " + collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("touch");
+            reset.ResetEntities();
+        }
     }
 
     private void Update()
