@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraTracking : MonoBehaviour
 {
     public Transform target;        // The player to follow
-    public float smoothSpeed = 0.125f;
+    public float smoothSpeed = 0.025f;
     public Vector3 offset;          // Offset from the player
 
     void LateUpdate()
