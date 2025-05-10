@@ -94,10 +94,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision occurred with: " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("touch");
             reset.ResetEntities();
         }
     }

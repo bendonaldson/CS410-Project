@@ -898,6 +898,7 @@ GameObject:
   - component: {fileID: 911596526}
   - component: {fileID: 911596525}
   - component: {fileID: 911596527}
+  - component: {fileID: 911596528}
   m_Layer: 0
   m_Name: ChaserEnemy
   m_TagString: Enemy
@@ -918,12 +919,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1511082948}
-  speed: 5
-  distanceBetween: 10
-  idleSpeed: 0
-  movementDuration: 0
-  movementBoundaryX: 0
-  movementBoundaryY: 0
+  speed: 7
+  activateDist: 8
+  deactivateDist: 15
+  idleSpeed: 10
+  movementDuration: 3
+  movementBoundaryX: 3
+  movementBoundaryY: 3
+  timeToRebound: 1.5
+  reboundSpeed: 5
+  timeToBounce: 0.1
 --- !u!4 &911596526
 Transform:
   m_ObjectHideFlags: 0
@@ -933,7 +938,7 @@ Transform:
   m_GameObject: {fileID: 911596524}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 11.75, y: 0, z: 0}
+  m_LocalPosition: {x: 21.86, y: 3.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -974,9 +979,36 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.020790335, y: -0.020790752}
-  m_Size: {x: 0.41683418, y: 0.6008203}
+  m_Offset: {x: -0.016318973, y: -0.0667774}
+  m_Size: {x: 0.5802097, y: 0.8615797}
   m_Direction: 0
+--- !u!50 &911596528
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911596524}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDamping: 0
+  m_AngularDamping: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &1105313762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,6 +1124,14 @@ PrefabInstance:
       propertyPath: reset
       value: 
       objectReference: {fileID: 42785594}
+    - target: {fileID: 8321552737363723876, guid: 8ea2e8d1b386fdc4481dfc7fccd71be8, type: 3}
+      propertyPath: JumpPower
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 8321552737363723876, guid: 8ea2e8d1b386fdc4481dfc7fccd71be8, type: 3}
+      propertyPath: FallAcceleration
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 8607331686624824674, guid: 8ea2e8d1b386fdc4481dfc7fccd71be8, type: 3}
       propertyPath: m_SortingLayer
       value: 2
