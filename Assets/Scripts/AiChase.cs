@@ -1,8 +1,9 @@
 using UnityEngine;
+using System.Collections;
 
 // Require the Rigidbody2D component to ensure it exists
 [RequireComponent(typeof(Rigidbody2D))]
-public class AiChaseRigidbody : MonoBehaviour // Renamed class for clarity
+public class AiChaseRigidbody : MonoBehaviour
 {
     // Public Variables
     public GameObject player;
@@ -17,46 +18,33 @@ public class AiChaseRigidbody : MonoBehaviour // Renamed class for clarity
 
     public float timeToRebound;
     public float reboundSpeed;
-    public float timeToBounce;
 
     // Private Variables
-    private Rigidbody2D _rb; // Reference to the Rigidbody2D component
-    private Transform _playerTransform; // Cache player's transform for efficiency
+    private Rigidbody2D _rb;
+    private Transform _playerTransform;
     private Vector2 _targetDirection;
     private float _timeToChangeDirection;
-    private Vector2 _movementBoundaryCenter; // Store the center point for boundaries
+    private Vector2 _movementBoundaryCenter;
     private bool _bounded;
     private bool _seeking;
-    //private bool _collided;
     private Vector2 _bounceDirection;
     private float _reboundTime;
     private float _collisionTimer;
 
     // Calculated Movement
     private Vector2 _nextMovement = Vector2.zero;
-    private float _nextRotationAngle = 0f; // Store target rotation Z angle
+    private float _nextRotationAngle = 0f;
 
     // Initialization
     void Awake()
     {
-        // Get the Rigidbody2D component attached to this GameObject
         _rb = GetComponent<Rigidbody2D>();
-
-        // Cache player transform
-        if (player != null)
-        {
-            _playerTransform = player.transform;
-        }
-        else
-        {
-            Debug.LogError("Player GameObject is not assigned!", this);
-            // Optional: Disable the script if player is 
-            // this.enabled = false;
-        }
     }
 
     void Start()
     {
+        StartCoroutine(FindPlayerDelayed());
+
         // Initialize idle movement
         _timeToChangeDirection = movementDuration;
         SetRandomDirection();
@@ -65,9 +53,35 @@ public class AiChaseRigidbody : MonoBehaviour // Renamed class for clarity
         _seeking = false; // Reset seeking state
     }
 
+    IEnumerator FindPlayerDelayed()
+    {
+        yield return null; // Wait for one frame to ensure the player is in the scene
+
+        // Find and cache player transform by tag
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject;
+            _playerTransform = player.transform;
+        }
+        else
+        {
+            Debug.LogError("No GameObject with the 'Player' tag found (after delay)!", this);
+            this.enabled = false;
+            yield break;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        // Ensure player transform is still valid
+        if (_playerTransform == null)
+        {
+            // Player might have been destroyed, or FindPlayerDelayed hasn't run yet
+            return;
+        }
+
         // Calculate distance to player
         float distance = Vector2.Distance(_rb.position, _playerTransform.position);
 
@@ -111,6 +125,8 @@ public class AiChaseRigidbody : MonoBehaviour // Renamed class for clarity
     // FixedUpdate is called for physics updates
     void FixedUpdate()
     {
+        if (_playerTransform == null) return; // Don't run AI if player isn't found yet
+
         _nextMovement = Vector2.zero; // Reset movement for this physics step
 
         if (_seeking)
@@ -141,7 +157,7 @@ public class AiChaseRigidbody : MonoBehaviour // Renamed class for clarity
         {
             // Calculate target position
             Vector2 currentPosition = _rb.position;
-            Vector2 targetPosition = currentPosition + _targetDirection * Time.fixedDeltaTime;
+            Vector2 targetPosition = currentPosition + _targetDirection * Time.fixedDeltaTime * idleSpeed;
 
             // Apply boundary clamping if in idle
             if (_bounded)

@@ -76,6 +76,15 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
     }
 
+    private void Start()
+    {
+        reset = FindObjectOfType<ResetScene>();
+        if (reset == null)
+        {
+            Debug.LogError("ResetScene script not found in the scene!", this);
+        }
+    }
+
     private void OnEnable()
     {
         _jumpAction.action.performed += OnJumpPerformed;
