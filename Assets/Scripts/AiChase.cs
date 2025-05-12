@@ -7,17 +7,20 @@ public class AiChaseRigidbody : MonoBehaviour
 {
     // Public Variables
     public GameObject player;
+
+    [Header("Seeking")]
     public float speed;
     public float activateDist;
     public float deactivateDist;
 
+    [Header("Idle")]
     public float idleSpeed;
     public float movementDuration;
     public float movementBoundaryX;
     public float movementBoundaryY;
 
+    [Header("Bounce Parameters")]
     public float timeToRebound;
-    public float reboundSpeed;
 
     // Private Variables
     private Rigidbody2D _rb;
@@ -29,10 +32,9 @@ public class AiChaseRigidbody : MonoBehaviour
     private bool _seeking;
     private Vector2 _bounceDirection;
     private float _reboundTime;
-    private float _collisionTimer;
+    private float reboundSpeed;
 
     // Calculated Movement
-    private Vector2 _nextMovement = Vector2.zero;
     private float _nextRotationAngle = 0f;
 
     // Initialization
@@ -51,6 +53,8 @@ public class AiChaseRigidbody : MonoBehaviour
         _movementBoundaryCenter = _rb.position;
         _bounded = false; // Reset bounded state initially
         _seeking = false; // Reset seeking state
+        // set rebound speed as a funciton of normal speed
+        reboundSpeed = speed * 1.3f;
     }
 
     IEnumerator FindPlayerDelayed()
@@ -122,12 +126,10 @@ public class AiChaseRigidbody : MonoBehaviour
         }
     }
 
-    // FixedUpdate is called for physics updates
+    // FixedUpdate is called for physics updatesa
     void FixedUpdate()
     {
         if (_playerTransform == null) return; // Don't run AI if player isn't found yet
-
-        _nextMovement = Vector2.zero; // Reset movement for this physics step
 
         if (_seeking)
         {

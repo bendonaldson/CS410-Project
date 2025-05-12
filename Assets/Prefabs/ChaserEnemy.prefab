@@ -48,16 +48,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 5
-  activateDist: 10
-  deactivateDist: 12
+  speed: 7
+  activateDist: 6
+  deactivateDist: 15
   idleSpeed: 2
   movementDuration: 3
   movementBoundaryX: 5
   movementBoundaryY: 5
-  timeToRebound: 0.3
-  reboundSpeed: 7
-  timeToBounce: 5
+  timeToRebound: 1
 --- !u!70 &4736162492999273493
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
