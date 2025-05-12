@@ -68,6 +68,12 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private float _time;
 
+    #region Animation Stuff
+    Animator animator;
+    bool isFacingRight = true;
+    #endregion
+
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -83,6 +89,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         {
             Debug.LogError("ResetScene script not found in the scene!", this);
         }
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void OnEnable()
@@ -113,6 +120,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         _time += Time.deltaTime;
         GatherInput();
+        FlipSprite();
+        animator.SetBool("isJumping", !_grounded);
     }
 
     private void GatherInput()
@@ -131,6 +140,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
         }
 
         if (_jumpToConsume) _jumpToConsume = false;
+
+        animator.SetBool("isJumping", !_grounded);
     }
 
     private bool _jumpToConsume;
@@ -158,6 +169,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
         HandleGravity();
 
         ApplyMovement();
+        animator.SetFloat("xVelocity", Math.Abs(_rb.linearVelocityX));
+        animator.SetFloat("yVelocity", _rb.linearVelocityY);
     }
 
     #region Collisions
@@ -259,6 +272,21 @@ public class PlayerController : MonoBehaviour, IPlayerController
             var inAirGravity = FallAcceleration;
             if (_endedJumpEarly && _frameVelocity.y > 0) inAirGravity *= JumpEndEarlyGravityModifier;
             _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
+        }
+    }
+
+    #endregion
+
+    #region Animator
+
+    void FlipSprite()
+    {
+        if (isFacingRight && _frameInput.Move.x < 0f || !isFacingRight && _frameInput.Move.x > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 ls = transform.localScale;
+            ls.x *= -1f;
+            transform.localScale = ls;
         }
     }
 

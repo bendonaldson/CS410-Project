@@ -187,7 +187,8 @@ public class AiChaseRigidbody : MonoBehaviour
     // Collision Detection
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player") && _seeking)
+        // !collision.gameObject.CompareTag("Player") && 
+        if (_seeking)
         {
             doBounce(collision);
         }
