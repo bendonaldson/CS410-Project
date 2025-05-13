@@ -1,54 +1,91 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class RoomSpawner : MonoBehaviour
 {
     public GameObject startRoomPrefab;
     public List<GameObject> roomPrefabs;
-    public int numberOfRooms = 5;
 
     private Transform currentExit;
+    private int roomCounter = 1;
 
     void Start()
     {
-        SpawnRooms();
+        GameObject firstRoom = Instantiate(startRoomPrefab, Vector3.zero, Quaternion.identity);
+        currentExit = FindChildByName(firstRoom.transform, "RoomExit");
+
+        AddSpawnTrigger(firstRoom);
+        UnityEngine.Debug.Log($"[RoomSpawner] Spawned StartRoom at {Vector3.zero}");
     }
 
-    void SpawnRooms()
+    public void SpawnNextRoom()
     {
-        // 1. Spawn StartRoom at origin
-        GameObject currentRoom = Instantiate(startRoomPrefab, Vector3.zero, Quaternion.identity);
-        Debug.Log($"Spawned Start Room: {currentRoom.name} at position: {Vector3.zero}");
-        currentExit = currentRoom.transform.Find("RoomExit");
-
-        // 2. Randomly pick and spawn N more rooms
-        List<GameObject> pool = new List<GameObject>(roomPrefabs);
-
-        for (int i = 0; i < numberOfRooms; i++)
+        if (roomPrefabs.Count == 0 || currentExit == null)
         {
-            if (pool.Count == 0) break;
-
-            int index = Random.Range(0, pool.Count);
-            GameObject nextRoomPrefab = pool[index];
-            Transform nextRoomStart = nextRoomPrefab.transform.Find("RoomStart");
-            GameObject nextRoomInstance;
-
-            if (nextRoomStart != null && currentExit != null)
-            {
-                Vector3 offset = currentExit.position - nextRoomStart.position;
-                nextRoomInstance = Instantiate(nextRoomPrefab, offset, Quaternion.identity);
-                Debug.Log($"Spawned Room {i + 1}: {nextRoomInstance.name} (Prefab: {nextRoomPrefab.name}) at position: {offset}, connected to {currentRoom.name}'s exit at {currentExit.position}");
-                currentRoom = nextRoomInstance;
-                currentExit = nextRoomInstance.transform.Find("RoomExit");
-                pool.RemoveAt(index);
-            }
-            else
-            {
-                Debug.LogError($"Room prefab {nextRoomPrefab.name} is missing a RoomStart or the current room is missing a RoomExit!");
-                break;
-            }
+            UnityEngine.Debug.LogWarning("[RoomSpawner] No room prefabs available or currentExit missing.");
+            return;
         }
+
+        int index = UnityEngine.Random.Range(0, roomPrefabs.Count);
+        GameObject nextRoomPrefab = roomPrefabs[index];
+
+        Transform nextRoomStart = FindChildByName(nextRoomPrefab.transform, "RoomStart");
+        if (nextRoomStart == null)
+        {
+            UnityEngine.Debug.LogError($"[RoomSpawner] Room prefab '{nextRoomPrefab.name}' is missing a RoomStart.");
+            return;
+        }
+
+        Vector3 offset = currentExit.position - nextRoomStart.position;
+        GameObject nextRoomInstance = Instantiate(nextRoomPrefab, offset, Quaternion.identity);
+
+        currentExit = FindChildByName(nextRoomInstance.transform, "RoomExit");
+        if (currentExit == null)
+        {
+            UnityEngine.Debug.LogWarning($"[RoomSpawner] Room '{nextRoomInstance.name}' is missing a RoomExit.");
+        }
+
+        UnityEngine.Debug.Log($"[RoomSpawner] Spawned Room {roomCounter++}: {nextRoomInstance.name} at {offset}");
+        AddSpawnTrigger(nextRoomInstance);
+    }
+
+    private void AddSpawnTrigger(GameObject room)
+    {
+        Transform spawnTrigger = FindChildByName(room.transform, "RoomSpawnTrigger");
+
+        if (spawnTrigger == null)
+        {
+            UnityEngine.Debug.LogWarning($"[RoomSpawner] Room '{room.name}' is missing a RoomSpawnTrigger.");
+            return;
+        }
+
+        BoxCollider2D col = spawnTrigger.GetComponent<BoxCollider2D>();
+        if (col == null)
+        {
+            col = spawnTrigger.gameObject.AddComponent<BoxCollider2D>();
+        }
+
+        col.isTrigger = true;
+        col.size = new Vector2(1f, 3f);
+
+        RoomSpawnTrigger triggerScript = spawnTrigger.GetComponent<RoomSpawnTrigger>();
+        if (triggerScript == null)
+        {
+            triggerScript = spawnTrigger.gameObject.AddComponent<RoomSpawnTrigger>();
+        }
+
+        triggerScript.spawner = this;
+
+        UnityEngine.Debug.Log($"[RoomSpawner] Connected RoomSpawnTrigger in room '{room.name}'");
+    }
+
+    private Transform FindChildByName(Transform parent, string targetName)
+    {
+        foreach (Transform child in parent.GetComponentsInChildren<Transform>(true))
+        {
+            if (child.name == targetName)
+                return child;
+        }
+        return null;
     }
 }

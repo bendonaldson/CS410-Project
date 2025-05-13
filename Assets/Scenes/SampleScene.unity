@@ -394,11 +394,10 @@ MonoBehaviour:
   startRoomPrefab: {fileID: 8687055983586337644, guid: 9ecc694cda5fdb6468ef89b356f6af73, type: 3}
   roomPrefabs:
   - {fileID: 7232134514720760510, guid: af3b8979c9b09cd46ab9b49c64883277, type: 3}
-  - {fileID: 7220728340585854082, guid: f9f88dc5e51256741a79c2a03f8609f9, type: 3}
-  - {fileID: 2874824832744898265, guid: fe9fbc49ee8e9b5439d17e1d3b8a4971, type: 3}
-  - {fileID: 329321426240632834, guid: b116cfdeceaabd542b4be434ae42f36e, type: 3}
-  - {fileID: 5187920722162539996, guid: 507ebd73ee5f38443ad801f74d48f6c0, type: 3}
-  numberOfRooms: 5
+  - {fileID: 7232134514720760510, guid: af3b8979c9b09cd46ab9b49c64883277, type: 3}
+  - {fileID: 7232134514720760510, guid: af3b8979c9b09cd46ab9b49c64883277, type: 3}
+  - {fileID: 7232134514720760510, guid: af3b8979c9b09cd46ab9b49c64883277, type: 3}
+  - {fileID: 7232134514720760510, guid: af3b8979c9b09cd46ab9b49c64883277, type: 3}
 --- !u!4 &1835875625
 Transform:
   m_ObjectHideFlags: 0
