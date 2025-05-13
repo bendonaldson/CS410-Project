@@ -98477,6 +98477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 490802777005121702}
+  - component: {fileID: 411541915011824418}
   m_Layer: 0
   m_Name: Room03
   m_TagString: Untagged
@@ -98497,6 +98498,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7839013162435456919}
   - {fileID: 6608707132190447782}
   - {fileID: 6072499430611684187}
   - {fileID: 7202612423044295323}
@@ -98504,6 +98506,63 @@ Transform:
   - {fileID: 6504393270479285924}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &411541915011824418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2874824832744898265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47646f79b0a027349a8acf5587ad509d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3640909002960078573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7839013162435456919}
+  - component: {fileID: 3622441649038935479}
+  m_Layer: 0
+  m_Name: Enemy01_Chaser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7839013162435456919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640909002960078573}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 49.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 490802777005121702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3622441649038935479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640909002960078573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8879e314b184a41bb49da2b504673a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabToSpawn: {fileID: 563344433462570334, guid: e54953b222320f4498aafe0181f89268, type: 3}
 --- !u!1 &6487423877713742932
 GameObject:
   m_ObjectHideFlags: 0

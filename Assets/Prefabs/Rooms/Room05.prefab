@@ -91358,6 +91358,51 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!1 &2484933552409025245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7548172451703244070}
+  - component: {fileID: 1700756835522818440}
+  m_Layer: 0
+  m_Name: Enemy01_Chaser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7548172451703244070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2484933552409025245}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10.6, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1880737938491855123}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1700756835522818440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2484933552409025245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8879e314b184a41bb49da2b504673a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabToSpawn: {fileID: 563344433462570334, guid: e54953b222320f4498aafe0181f89268, type: 3}
 --- !u!1 &5176574536326729815
 GameObject:
   m_ObjectHideFlags: 0
@@ -91398,6 +91443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1880737938491855123}
+  - component: {fileID: 5926498907901499948}
   m_Layer: 0
   m_Name: Room05
   m_TagString: Untagged
@@ -91418,6 +91464,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7548172451703244070}
   - {fileID: 5484608349870826257}
   - {fileID: 2696507735822725430}
   - {fileID: 8015422644352595582}
@@ -91425,6 +91472,18 @@ Transform:
   - {fileID: 2919300300439411811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5926498907901499948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5187920722162539996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47646f79b0a027349a8acf5587ad509d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5446081384661335096
 GameObject:
   m_ObjectHideFlags: 0
