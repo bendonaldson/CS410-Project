@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         GatherInput();
         FlipSprite();
         animator.SetBool("isJumping", !_grounded);
+        animator.SetFloat("yVelocity", _rb.linearVelocityY);
     }
 
     private void GatherInput()
@@ -140,8 +141,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
         }
 
         if (_jumpToConsume) _jumpToConsume = false;
-
-        animator.SetBool("isJumping", !_grounded);
     }
 
     private bool _jumpToConsume;
@@ -170,7 +169,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
         ApplyMovement();
         animator.SetFloat("xVelocity", Math.Abs(_rb.linearVelocityX));
-        animator.SetFloat("yVelocity", _rb.linearVelocityY);
     }
 
     #region Collisions
