@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerController : MonoBehaviour, IPlayerController
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void Start()
     {
-        reset = FindObjectOfType<ResetScene>();
+        reset = FindAnyObjectByType<ResetScene>();
         if (reset == null)
         {
             Debug.LogError("ResetScene script not found in the scene!", this);
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            reset.ResetEntities();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
