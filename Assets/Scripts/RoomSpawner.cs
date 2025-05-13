@@ -40,9 +40,9 @@ public class RoomSpawner : MonoBehaviour
                 Vector3 offset = currentExit.position - nextRoomStart.position;
                 nextRoomInstance = Instantiate(nextRoomPrefab, offset, Quaternion.identity);
                 Debug.Log($"Spawned Room {i + 1}: {nextRoomInstance.name} (Prefab: {nextRoomPrefab.name}) at position: {offset}, connected to {currentRoom.name}'s exit at {currentExit.position}");
-                currentRoom = nextRoomInstance; // Update current room for the next connection log
+                currentRoom = nextRoomInstance;
                 currentExit = nextRoomInstance.transform.Find("RoomExit");
-                pool.RemoveAt(index); // optional: avoid repeats
+                pool.RemoveAt(index);
             }
             else
             {

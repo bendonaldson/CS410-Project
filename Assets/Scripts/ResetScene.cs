@@ -29,15 +29,13 @@ public class ResetScene : MonoBehaviour
         }
     }
 
-    // Public function to be called to reset the tagged objects
     public void ResetEntities()
     {
         foreach (var pair in initialTransforms)
         {
-            if (pair.Key != null) // Check if the GameObject still exists
+            if (pair.Key != null)
             {
                 pair.Key.transform.position = pair.Value.position;
-                // You can add more properties to reset here, like scale, etc.
             }
             else
             {
