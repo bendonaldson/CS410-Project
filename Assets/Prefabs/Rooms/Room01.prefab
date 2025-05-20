@@ -1052,7 +1052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bd30dc6da0bfe4d915c486db919ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs: []
+  enemyPrefabs:
+  - {fileID: 563344433462570334, guid: e54953b222320f4498aafe0181f89268, type: 3}
   obstaclePrefabs:
   - {fileID: 3263234529895138707, guid: 11944b3403cba6e4db735344a69a7b54, type: 3}
   - {fileID: 3263234529895138707, guid: 5ce9237b9b7f70f4bb3a4b7b788090c1, type: 3}
