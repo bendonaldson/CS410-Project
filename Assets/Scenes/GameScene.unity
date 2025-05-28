@@ -338,8 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd54da7221895984795860f04131916d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTag: Enemy
-  playerTag: Player
 --- !u!4 &279103673
 Transform:
   m_ObjectHideFlags: 0
@@ -1975,10 +1973,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a182b8a04f6af264e9510b7c283e350e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startRoomPrefab: {fileID: 8687055983586337644, guid: 9ecc694cda5fdb6468ef89b356f6af73, type: 3}
+  startRoomPrefab: {fileID: 7232134514720760510, guid: 293f9bff7ed0b114eb905e9032e30847, type: 3}
   roomPrefabs:
   - {fileID: 7232134514720760510, guid: c6a25cff441f84748918c55a1fe281fb, type: 3}
   - {fileID: 7232134514720760510, guid: 141450c9952ad0945af0bb5dfa20cbbb, type: 3}
+  - {fileID: 7232134514720760510, guid: d41072f8a7f959c44be77ee178b9ed15, type: 3}
 --- !u!4 &1835875625
 Transform:
   m_ObjectHideFlags: 0
