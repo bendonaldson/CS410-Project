@@ -59,14 +59,20 @@ public class PlayerController : MonoBehaviour, IPlayerController
     [Tooltip("Assign the TextMeshProUGUI object from your Canvas for interaction prompts.")]
     [SerializeField] private TextMeshProUGUI _interactionPromptText;
 
+    [Header("Sounds")]
+    [Tooltip("AudioSource for playing walking sounds. Should be set to loop in the Inspector.")]
+    public AudioSource WalkingAudioSource;
+    [Tooltip("AudioSource for the jump sound. Assign in Inspector.")]
+    public AudioSource JumpAudioSource;
+    [Tooltip("AudioSource for the land sound. Assign in Inspector.")]
+    public AudioSource LandAudioSource;
+
     private Rigidbody2D _rb;
     private CapsuleCollider2D _col;
     private FrameInput _frameInput;
     private Vector2 _frameVelocity;
     private bool _cachedQueryStartInColliders;
     private IInteractable _currentInteractable;
-
-    public ResetScene reset;
 
     #region Interface
 
@@ -94,12 +100,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void Start()
     {
-        reset = FindAnyObjectByType<ResetScene>();
-        if (reset == null)
-        {
-            Debug.LogError("ResetScene script not found in the scene!", this);
-        }
-
         animator = GetComponentInChildren<Animator>();
 
         if (_interactionPromptText != null)
@@ -151,6 +151,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _time += Time.deltaTime;
         GatherInput();
         FlipSprite();
+        HandleWalkingSound();
         animator.SetBool("isJumping", !_grounded);
         animator.SetFloat("yVelocity", _rb.linearVelocityY);
     }
@@ -258,6 +259,30 @@ public class PlayerController : MonoBehaviour, IPlayerController
         animator.SetFloat("xVelocity", Math.Abs(_rb.linearVelocityX));
     }
 
+    #region Sound Handling
+    private void HandleWalkingSound()
+    {
+        if (WalkingAudioSource == null) return;
+
+        bool isActuallyMovingHorizontally = Mathf.Abs(_rb.linearVelocityX) > 0.1f;
+
+        if (isActuallyMovingHorizontally && _grounded)
+        {
+            if (!WalkingAudioSource.enabled)
+            {
+                WalkingAudioSource.enabled = true;
+            }
+        }
+        else
+        {
+            if (WalkingAudioSource.enabled)
+            {
+                WalkingAudioSource.enabled = false;
+            }
+        }
+    }
+    #endregion
+
     #region Collisions
 
     private float _frameLeftGrounded = float.MinValue;
@@ -281,6 +306,12 @@ public class PlayerController : MonoBehaviour, IPlayerController
             _coyoteUsable = true;
             _bufferedJumpUsable = true;
             _endedJumpEarly = false;
+
+            if (LandAudioSource != null)
+            {
+                LandAudioSource.Play();
+            }
+
             GroundedChanged?.Invoke(true, Mathf.Abs(_frameVelocity.y));
         }
         // Left the Ground
@@ -322,6 +353,12 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _bufferedJumpUsable = false;
         _coyoteUsable = false;
         _frameVelocity.y = JumpPower;
+
+        if (JumpAudioSource != null)
+        {
+            JumpAudioSource.Play();
+        }
+
         Jumped?.Invoke();
     }
 

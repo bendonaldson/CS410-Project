@@ -48,10 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 4
-  activateDist: 10
-  deactivateDist: 15
-  idleSpeed: 2
+  speed: 6
+  activateDist: 16
+  deactivateDist: 20
+  idleSpeed: 3
   movementDuration: 3
   movementBoundaryX: 5
   movementBoundaryY: 5
@@ -90,8 +90,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.020790335, y: -0.020790752}
-  m_Size: {x: 0.41683418, y: 0.6008203}
+  m_Offset: {x: -0.039056562, y: 0.011172352}
+  m_Size: {x: 0.58782196, y: 0.7012777}
   m_Direction: 0
 --- !u!50 &5069231256100286185
 Rigidbody2D:
@@ -147,8 +147,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3130845305565318183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
