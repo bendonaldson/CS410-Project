@@ -1,10 +1,14 @@
+using TMPro;
 using UnityEngine;
 
 public class EnterRoom : MonoBehaviour, IInteractable
 {
     [Tooltip("Make sure this Collider2D is set to 'Is Trigger' in the Inspector.")]
-    [SerializeField]
-    private Collider2D _interactTriggerCollider; // Reference to the trigger collider
+    [SerializeField] private Collider2D _interactTriggerCollider; // Reference to the trigger collider
+
+    [Header("UI Feedback")]
+    [Tooltip("Assign the TextMeshProUGUI object from your Canvas for interaction prompts.")]
+    [SerializeField] private TextMeshProUGUI _interactText;
 
     private void Awake()
     {
@@ -19,6 +23,11 @@ public class EnterRoom : MonoBehaviour, IInteractable
         {
             Debug.LogWarning($"Collider on {gameObject.name} is not set to 'Is Trigger'. Interaction will not work as expected.", this);
         }
+
+        if (_interactText != null)
+        {
+            _interactText.gameObject.SetActive(false);
+        }
     }
 
     // Called when another collider enters this object's trigger
@@ -28,6 +37,7 @@ public class EnterRoom : MonoBehaviour, IInteractable
         // IMPORTANT: Make sure your Player GameObject has the "Player" tag set!
         if (other.CompareTag("Player"))
         {
+            _interactText.gameObject.SetActive(true);
             PlayerController playerController = other.GetComponent<PlayerController>();
             if (playerController != null)
             {
@@ -42,6 +52,8 @@ public class EnterRoom : MonoBehaviour, IInteractable
         // Ensure the exiting collider belongs to the Player
         if (other.CompareTag("Player"))
         {
+            _interactText.gameObject.SetActive(false);
+
             PlayerController playerController = other.GetComponent<PlayerController>();
             if (playerController != null)
             {
