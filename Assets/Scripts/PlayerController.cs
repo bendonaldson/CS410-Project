@@ -89,13 +89,22 @@ public class PlayerController : MonoBehaviour, IPlayerController
     bool isFacingRight = true;
     #endregion
 
+    #region Distance Traveled
+    private float _startXPosition;
+    private float _maxRightXPositionReached;
+    public float HorizontalDistanceTraveledRight { get; private set; }
+    #endregion
+
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<CapsuleCollider2D>();
-
         _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
+
+        _startXPosition = transform.position.x;
+        _maxRightXPositionReached = _startXPosition;
+        HorizontalDistanceTraveledRight = 0f;
     }
 
     private void Start()
@@ -154,6 +163,12 @@ public class PlayerController : MonoBehaviour, IPlayerController
         HandleWalkingSound();
         animator.SetBool("isJumping", !_grounded);
         animator.SetFloat("yVelocity", _rb.linearVelocityY);
+
+        if (transform.position.x > _maxRightXPositionReached)
+        {
+            _maxRightXPositionReached = transform.position.x;
+        }
+        HorizontalDistanceTraveledRight = Mathf.Max(0, _maxRightXPositionReached - _startXPosition);
     }
 
     private void GatherInput()

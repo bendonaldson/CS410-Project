@@ -60,6 +60,9 @@ sysinfo.txt
 *.aab
 *.unitypackage
 *.app
+WebGL Builds/
+connectwebgl.zip
+webgl_sharing
 
 # Crashlytics generated file
 crashlytics-build.properties
