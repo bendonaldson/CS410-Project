@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class RoomContentGenerator : MonoBehaviour
 {
-    public GameObject[] enemyPrefabs;
     public GameObject[] obstaclePrefabs;
     public GameObject[] trapPrefabs;
 
     void Start()
     {
-        SpawnAtMarkers("EnemySpawn", enemyPrefabs);
         SpawnAtMarkers("ObstacleSpawn", obstaclePrefabs);
         SpawnAtMarkers("TrapSpawn", trapPrefabs);
     }
