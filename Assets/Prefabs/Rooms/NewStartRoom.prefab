@@ -90,7 +90,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3173404286825036394
 Transform:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ Transform:
   m_GameObject: {fileID: 3214633190361760055}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 58.45, y: 0, z: 0}
+  m_LocalPosition: {x: 58, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -590,8 +590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bd30dc6da0bfe4d915c486db919ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 563344433462570334, guid: e54953b222320f4498aafe0181f89268, type: 3}
   obstaclePrefabs:
   - {fileID: 3263234529895138707, guid: 11944b3403cba6e4db735344a69a7b54, type: 3}
   - {fileID: 3263234529895138707, guid: 5ce9237b9b7f70f4bb3a4b7b788090c1, type: 3}

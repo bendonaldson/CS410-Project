@@ -1976,9 +1976,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRoomPrefab: {fileID: 7232134514720760510, guid: 293f9bff7ed0b114eb905e9032e30847, type: 3}
   roomPrefabs:
+  - {fileID: 7232134514720760510, guid: 76b1cee4b95aabd48b7d4c9bc5bb1c94, type: 3}
+  - {fileID: 7232134514720760510, guid: 6236241226554db41a5e107e26b1f78c, type: 3}
+  - {fileID: 7232134514720760510, guid: d41072f8a7f959c44be77ee178b9ed15, type: 3}
   - {fileID: 7232134514720760510, guid: c6a25cff441f84748918c55a1fe281fb, type: 3}
   - {fileID: 7232134514720760510, guid: 141450c9952ad0945af0bb5dfa20cbbb, type: 3}
-  - {fileID: 7232134514720760510, guid: d41072f8a7f959c44be77ee178b9ed15, type: 3}
 --- !u!4 &1835875625
 Transform:
   m_ObjectHideFlags: 0

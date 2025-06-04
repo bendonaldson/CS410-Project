@@ -35,16 +35,7 @@ public class CameraFollow : MonoBehaviour
     }
     void UpdateCameraYOffset()
     {
-        // If player's Y is below or at the ground threshold, use ground offset
-        if (target.position.y <= groundThresholdY)
-        {
-            currentCameraTargetY = lockedGroundCameraY;
-        }
-        // Otherwise, use platform offset
-        else
-        {
-            currentCameraTargetY = target.position.y + playerFollowYOffset;
-        }
+        // Always follow the player’s Y directly:
+        currentCameraTargetY = target.position.y + playerFollowYOffset;
     }
 }
-
