@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d33ef6ca598d448998b3da7e0e4ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolDistance: 10
+  patrolDistance: 8
   speed: 3.5
   stoppingDistance: 0.1
   faceMovementDirection: 1

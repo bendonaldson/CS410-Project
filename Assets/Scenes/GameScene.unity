@@ -5389,9 +5389,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1920794322372533166, guid: 8ea2e8d1b386fdc4481dfc7fccd71be8, type: 3}
-  zOffset: 7
-  smoothSpeed: 0.125
-  playerFollowYOffset: 0
+  zOffset: 8
+  smoothSpeed: 0.085
+  playerFollowYOffset: 2.5
 --- !u!1 &575863260
 GameObject:
   m_ObjectHideFlags: 0

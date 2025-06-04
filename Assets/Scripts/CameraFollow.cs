@@ -46,10 +46,10 @@ public class CameraFollow : MonoBehaviour
         {
             currentCameraTargetY = target.position.y + playerFollowYOffset;
         }
-        
 
-        // Always follow the player’s Y directly:
-        //currentCameraTargetY = target.position.y + playerFollowYOffset;
+
+        // Always follow the player's Y directly:
+        currentCameraTargetY = target.position.y + playerFollowYOffset;
     }
 
     public static void UpdateFloorY(float amount)
