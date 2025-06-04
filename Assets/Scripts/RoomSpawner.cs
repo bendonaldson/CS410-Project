@@ -9,7 +9,8 @@ public class RoomSpawner : MonoBehaviour
 
     private Transform currentExit;
     private int roomCounter = 1;
-    private bool lastWasV;  // Tracks whether the previously spawned room’s name started with “V”
+    private bool lastWasUp;    // True if the previously spawned room’s name started with “Up”
+    private bool lastWasDown;  // True if the previously spawned room’s name started with “Down”
 
     void Start()
     {
@@ -17,8 +18,9 @@ public class RoomSpawner : MonoBehaviour
         GameObject firstRoom = Instantiate(startRoomPrefab, Vector3.zero, Quaternion.identity);
         currentExit = FindChildByName(firstRoom.transform, "RoomExit");
 
-        // Initialize lastWasV based on the start room’s name
-        lastWasV = startRoomPrefab.name.StartsWith("V");
+        // Initialize lastWasUp / lastWasDown based on the start room’s name
+        lastWasUp = startRoomPrefab.name.StartsWith("Up");
+        lastWasDown = startRoomPrefab.name.StartsWith("Down");
 
         AddSpawnTrigger(firstRoom);
         UnityEngine.Debug.Log($"[RoomSpawner] Spawned StartRoom at {Vector3.zero}");
@@ -34,26 +36,43 @@ public class RoomSpawner : MonoBehaviour
 
         GameObject nextRoomPrefab;
 
-        if (lastWasV)
+        if (lastWasUp)
         {
-            // If the last room started with “V”, pick a prefab that does NOT start with “V”
-            List<GameObject> nonVRooms = roomPrefabs
-                .Where(r => !r.name.StartsWith("V"))
+            // If the last room started with “Up,” disallow any prefab starting with “Down”
+            List<GameObject> notDown = roomPrefabs
+                .Where(r => !r.name.StartsWith("Down"))
                 .ToList();
 
-            if (nonVRooms.Count > 0)
+            if (notDown.Count > 0)
             {
-                nextRoomPrefab = nonVRooms[UnityEngine.Random.Range(0, nonVRooms.Count)];
+                nextRoomPrefab = notDown[UnityEngine.Random.Range(0, notDown.Count)];
             }
             else
             {
-                // If all prefabs start with “V”, just pick any to avoid an infinite loop
+                // Fallback if all prefabs start with “Down”
+                nextRoomPrefab = roomPrefabs[UnityEngine.Random.Range(0, roomPrefabs.Count)];
+            }
+        }
+        else if (lastWasDown)
+        {
+            // If the last room started with “Down,” disallow any prefab starting with “Up”
+            List<GameObject> notUp = roomPrefabs
+                .Where(r => !r.name.StartsWith("Up"))
+                .ToList();
+
+            if (notUp.Count > 0)
+            {
+                nextRoomPrefab = notUp[UnityEngine.Random.Range(0, notUp.Count)];
+            }
+            else
+            {
+                // Fallback if all prefabs start with “Up”
                 nextRoomPrefab = roomPrefabs[UnityEngine.Random.Range(0, roomPrefabs.Count)];
             }
         }
         else
         {
-            // If the last room did NOT start with “V”, pick any prefab
+            // If the last room was neither “Up” nor “Down,” pick any prefab
             nextRoomPrefab = roomPrefabs[UnityEngine.Random.Range(0, roomPrefabs.Count)];
         }
 
@@ -83,8 +102,9 @@ public class RoomSpawner : MonoBehaviour
         UnityEngine.Debug.Log($"[RoomSpawner] Spawned Room {roomCounter++}: {nextRoomInstance.name} at {offset}");
         AddSpawnTrigger(nextRoomInstance);
 
-        // Update lastWasV for the next spawn
-        lastWasV = nextRoomPrefab.name.StartsWith("V");
+        // Update lastWasUp / lastWasDown for the next spawn
+        lastWasUp = nextRoomPrefab.name.StartsWith("Up");
+        lastWasDown = nextRoomPrefab.name.StartsWith("Down");
     }
 
     private void AddSpawnTrigger(GameObject room)
