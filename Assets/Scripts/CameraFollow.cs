@@ -10,12 +10,13 @@ public class CameraFollow : MonoBehaviour
     public float smoothSpeed = 0.125f; // How smoothly the camera moves
 
     [Header("Vertical Offsets")]
-    public float lockedGroundCameraY = 3f; // Camera's Y position when on ground (relative to player)
+    public static float onFloorYOffset = 4f; // Camera's Y position when on ground (relative to player)
     public float playerFollowYOffset = 0f; // Camera's Y position when on platforms (relative to player)
 
-    [Header("Ground Detection")]
-    public float groundThresholdY = 0f; // The Y-coordinate below which the camera considers it "ground floor"
-
+    // The Y-coordinate below which the camera considers it "ground floor"
+    // This is updated in PlayerController on collision with floor.
+    public static float floorThresholdY = 0f;
+    public static float floorBottomY = 0f;
     private float currentCameraTargetY; // The target Y offset the camera is currently moving towards
 
     void LateUpdate()
@@ -35,7 +36,25 @@ public class CameraFollow : MonoBehaviour
     }
     void UpdateCameraYOffset()
     {
+        // If player's Y is below or at the ground threshold, use ground offset
+        if (floorBottomY < target.position.y || target.position.y <= floorThresholdY)
+        {
+            currentCameraTargetY = floorThresholdY;
+        }
+        // Otherwise, use platform offset
+        else
+        {
+            currentCameraTargetY = target.position.y + playerFollowYOffset;
+        }
+        
+
         // Always follow the player’s Y directly:
-        currentCameraTargetY = target.position.y + playerFollowYOffset;
+        //currentCameraTargetY = target.position.y + playerFollowYOffset;
+    }
+
+    public static void UpdateFloorY(float amount)
+    {
+        floorThresholdY = amount + onFloorYOffset;
+        floorBottomY = amount - 0.5f;
     }
 }

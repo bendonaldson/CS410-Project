@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 485828284295391225}
   - component: {fileID: 37928044498911099}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ground_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,9 +88,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4574337135609112945}
   - component: {fileID: 3189484964022808070}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ground_small
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

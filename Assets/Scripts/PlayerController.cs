@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
     [Header("LAYERS")]
     [Tooltip("Set this to the layer your player is on")]
     public LayerMask PlayerLayer;
+    [Tooltip("Set this to the floor layer")]
+    public LayerMask FloorLayer;
 
     [Header("INPUT")]
     [Tooltip("Set this to the move action input")]
@@ -66,6 +68,9 @@ public class PlayerController : MonoBehaviour, IPlayerController
     public AudioSource JumpAudioSource;
     [Tooltip("AudioSource for the land sound. Assign in Inspector.")]
     public AudioSource LandAudioSource;
+
+    [Header("Camera")]
+    [Tooltip("Main camera. Assign in Inspector.")]
 
     private Rigidbody2D _rb;
     private CapsuleCollider2D _col;
@@ -328,6 +333,12 @@ public class PlayerController : MonoBehaviour, IPlayerController
             }
 
             GroundedChanged?.Invoke(true, Mathf.Abs(_frameVelocity.y));
+
+            bool floorHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, GrounderDistance, FloorLayer);
+            if (floorHit)
+            {
+                CameraFollow.UpdateFloorY(transform.position.y);
+            }
         }
         // Left the Ground
         else if (_grounded && !groundHit)

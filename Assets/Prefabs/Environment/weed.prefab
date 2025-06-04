@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd075a49570564d45889b83235d7af87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotationAngle: 5
-  initialFrequency: 1.5
-  rustleDuration: 1
+  maxRotationAngle: 10
+  initialFrequency: 10
+  rustleDuration: 3
   dampingFactor: 2
