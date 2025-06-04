@@ -558,7 +558,7 @@ MonoBehaviour:
   zOffset: 10
   smoothSpeed: 0.125
   lockedGroundCameraY: 3
-  playerFollowYOffset: 0
+  playerFollowYOffset: 3
   groundThresholdY: 3
 --- !u!1 &575863260
 GameObject:
