@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour
     public float smoothSpeed = 0.125f; // How smoothly the camera moves
 
     [Header("Vertical Offsets")]
-    public static float onFloorYOffset = 4f; // Camera's Y position when on ground (relative to player)
+    public static float onFloorYOffset = 3f; // Camera's Y position when on ground (relative to player)
     public float playerFollowYOffset = 0f; // Camera's Y position when on platforms (relative to player)
 
     // The Y-coordinate below which the camera considers it "ground floor"
